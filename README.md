@@ -8,12 +8,10 @@ React Native App
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-success.svg?style=flat-square&color=33CC12" target="_blank" />
   </a>
   
-  <a aria-label="Follow me on Twitter" href="https://twitter.com/moha1313128" target="_blank">
-    <img  alt="Twitter" src="https://twitter.com/moha1313128/followers" target="_blank" />
-  </a>
+  
   
   <a aria-label="Follow me on Twitter" href="https://twitter.com/intent/follow?screen_name=moha1313128" target="_blank">
-    <img  alt="Twitter: moha1313128" src="https://img.shields.io/twitter/follow/expo.svg?style=flat-square&label=Followmoha1313128&logo=TWITTER&logoColor=FFFFFF&labelColor=00aced&logoWidth=15&color=lightgray" target="_blank" />
+    <img  alt="Twitter: moha1313128" src="https://img.shields.io/twitter/follow/expo.svg?style=flat-square&label=Follow%20%40moha1313128&logo=TWITTER&logoColor=FFFFFF&labelColor=00aced&logoWidth=15&color=lightgray" target="_blank" />
   </a>
   
 </p>
