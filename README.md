@@ -7,7 +7,10 @@ React Native App
   <a aria-label="Expo is free to use" href="https://github.com/expo/expo/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-success.svg?style=flat-square&color=33CC12" target="_blank" />
   </a>
-</a>
+  
+  <a aria-label="Follow me on Twitter" href="https://twitter.com/moha1313128" target="_blank">https://twitter.com/moha1313128/followers
+    <img  alt="Twitter" src="https://twitter.com/moha1313128/followers" target="_blank" />
+  </a>
   
 </p>
 
