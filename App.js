@@ -1,46 +1,30 @@
 import React, { useState} from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import Head from './components/head';
 
 export default function App() {
-  const [people, setPeople] = useState([
-    { name: 'moha1', id: '1' },
-    { name: 'moha2', id: '2' },
-    { name: 'moha3', id: '3' },
-    { name: 'moha4', id: '4' },
-    { name: 'moha5', id: '5' },
-    { name: 'moha6', id: '6' },
-    { name: 'moha7', id: '7' },
-    { name: 'moha8', id: '8' },
+  const [todos, setTodos] = useState([
+    { text: 'buy coffee', key: '1'},
+    { text: 'create app', key: '2'},
+    { text: 'watch movie', key: '3'},
   ]);
 
-  const pressHandler = (id) => {
-    console.log(id);
-    setPeople((prevPeople) => {
-      return prevPeople.filter(person => person.id != id);
-    });
-  }
 
   return (
     <View style={styles.container}>
-      <FlatList 
-      numColumns={2}
-      keyExtractor={(item)=>item.id}
-        data={people}
-        renderItem={({item})=>(
-          <TouchableOpacity onPress={() => pressHandler(item.id)}>
-            <Text style={styles.item}>{item.name}</Text>
-          </TouchableOpacity>
-          
-        )}
-      />
-
-      {/* <ScrollView>
-        { people.map(item => (
-            <View key={item.key}>
-              <Text style={styles.item}>{item.name}</Text>
-            </View>
-        ))}
-      </ScrollView> */}
+      {/* Head */}
+      <Head />
+      <View style={styles.content}>
+        {/* Form */}
+        <View style={styles.list}>
+          <FlatList 
+            data={todos}
+            renderItem={({ item }) => (
+              <Text>{item.text}</Text>
+            )}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -49,19 +33,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 40
+    alignItems: 'center',
+    justifyContent: 'center',
+    // paddingHorizontal: 20,
+    // paddingTop: 40
   },
-  item: {
-    marginTop: 24,
-    padding: 30,
-    backgroundColor: 'blue',
-    color: 'white',
-    fontSize: 24,
-    borderRadius: 50,
-    marginHorizontal: 10,
-    marginTop:24
+  content: {
+    padding: 40,
+  },
+  list: {
+    marginTop:20
   }
 });
