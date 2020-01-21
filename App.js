@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import Head from './components/head';
-// import TodoItem from './components/todoitem';
+import TodoItem from './components/todoitem';
 // import AddTodoItem from './components/addtodoitem';
-// // import SmartHome from './navigation/SmartHome';
 
 
 export default function App() {
@@ -12,11 +11,11 @@ export default function App() {
         { text: 'Create an App', key: '2'},
         { text: 'Paly a game', key: '3'}
     ]);
-    // const pressHandler = (key) => {
-    //     setTodos((prevTodos) => {
-    //         return prevTodos.filter(todo => todo.key != key);
-    //     });
-    // }
+    const pressHandler = (key) => {
+        setTodos((prevTodos) => {
+            return prevTodos.filter(todo => todo.key != key);
+        });
+    }
     // const submitHandler = (text) => {
     //     setTodos((prevTodos) => {
     //         return [
@@ -35,8 +34,7 @@ export default function App() {
                     <FlatList
                         data={todos}
                         renderItem={( {item}) => ( 
-                            <Text>{item.text}</Text>
-                        // <TodoItem item={item} pressHandler={pressHandler} />
+                        <TodoItem item={item} pressHandler={pressHandler} />
                         )}
                     />
                 </View>
