@@ -1,73 +1,80 @@
-import React, {useState} from 'react';
-import Moment from 'react-moment';
-import { StyleSheet, View, Text, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Head from './components/head';
-import TodoItem from './components/todoitem';
-import AddTodoItem from './components/addtodoitem';
-import Sandbox from './components/sandbox';
+import React from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+// import * as firebase from 'firebase';
 
+// Your web app's Firebase configuration
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBatJFU1j__Q86l95KLlgKXRjubTLj9bHI",
+//     authDomain: "react-app-bfdba.firebaseapp.com",
+//     databaseURL: "https://react-app-bfdba.firebaseio.com",
+//     projectId: "react-app-bfdba",
+//     storageBucket: "react-app-bfdba.appspot.com",
+//     messagingSenderId: "873551684149",
+//     appId: "1:873551684149:web:d847220c7f9dd2a5abc77c"
+// };
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
 
-export default function App() {
-    const [todos, setTodos] = useState([
-        { text: 'Buy Coffee', key: '1'},
-        { text: 'Create an App', key: '2'},
-        { text: 'Paly a game', key: '3'}
-    ]);
-    const pressHandler = (key) => {
-        setTodos((prevTodos) => {
-            return prevTodos.filter(todo => todo.key != key);
-        });
+import { Container, Content, Header, Form, Input, Button, Label, Item } from 'native-base';
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }
+
+  render() {
+    if (!this.state.isReady) {
+      return <AppLoading />;
     }
-    const submitHandler = (text) => {
-        if(text.length > 3) {
-            setTodos((prevTodos) => {
-                return [
-                    { text: text, key: Math.random().toString() },
-                    ...prevTodos,
-                ];
-            });
-        } else {
-            Alert.alert('Oops!', 'Enter Word That Have A Sens', [
-                {text: 'OK', onpress: () => console.log('Closed')}
-            ]);
-        }
-    }
-    
+
     return (
-        // <Sandbox></Sandbox>
-        <TouchableWithoutFeedback onPress={() => {
-            Keyboard.dismiss();
-            // console.log('Dismiss');
-        }}>
-        <View style={styles.container}>
-            <Head />
-            <View style={styles.content}>
-                <AddTodoItem submitHandler={submitHandler} /> 
-                <View style={styles.list}>
-                    <FlatList
-                        data={todos}
-                        renderItem={( {item}) => ( 
-                            <TodoItem item={item} pressHandler={pressHandler} />
-                        )}
-                    />
-                </View>
-            </View>
-        </View>
-        </TouchableWithoutFeedback>
+      <Container style={styles.container}>
+        <Form>
+            <Item floatingLabel>
+                <Label>Email</Label>
+                <Input
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                />
+            </Item>
+            <Item floatingLabel>
+                <Label>Password</Label>
+                <Input
+                    secureTextEntry={true}
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                />
+            </Item>
+            <Button full rounded success style={{ marginTop:30 }}>
+                <Text>Login</Text>
+            </Button>
+        </Form>
+      </Container>
     );
+  }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff'
-    },
-    list: {
-        flex: 1,
-        marginTop: 20,
-    },
-    content: {
-        flex: 1,
-        padding: 20,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        padding: 20
     }
-});
+})
+
