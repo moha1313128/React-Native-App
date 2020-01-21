@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import Head from './components/head';
 import TodoItem from './components/todoitem';
-// import AddTodoItem from './components/addtodoitem';
+import AddTodoItem from './components/addtodoitem';
 
 
 export default function App() {
@@ -16,20 +16,20 @@ export default function App() {
             return prevTodos.filter(todo => todo.key != key);
         });
     }
-    // const submitHandler = (text) => {
-    //     setTodos((prevTodos) => {
-    //         return [
-    //             { text: text, key: Math.random().toString() },
-    //             ...prevTodos
-    //         ]
-    //     });
-    // }
+    const submitHandler = (text) => {
+        setTodos((prevTodos) => {
+            return [
+                { text: text, key: Math.random().toString() },
+                ...prevTodos
+            ]
+        });
+    }
 
     return (
         <View style={styles.container}>
             <Head />
             <View style={styles.content}>
-                {/* <AddTodoItem submitHandler={submitHandler} />  */}
+                <AddTodoItem submitHandler={submitHandler} /> 
                 <View style={styles.list}>
                     <FlatList
                         data={todos}
