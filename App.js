@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, FlatList, Alert } from 'react-native';
+import Moment from 'react-moment';
+import { StyleSheet, View, Text, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Head from './components/head';
 import TodoItem from './components/todoitem';
 import AddTodoItem from './components/addtodoitem';
@@ -32,6 +33,10 @@ export default function App() {
     }
 
     return (
+        <TouchableWithoutFeedback onPress={() => {
+            Keyboard.dismiss();
+            // console.log('Dismiss');
+        }}>
         <View style={styles.container}>
             <Head />
             <View style={styles.content}>
@@ -40,12 +45,13 @@ export default function App() {
                     <FlatList
                         data={todos}
                         renderItem={( {item}) => ( 
-                        <TodoItem item={item} pressHandler={pressHandler} />
+                            <TodoItem item={item} pressHandler={pressHandler} />
                         )}
                     />
                 </View>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     );
 }
 
