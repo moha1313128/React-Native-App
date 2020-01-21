@@ -1,47 +1,60 @@
-import React, { useState} from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import Head from './components/head';
+import React, {useState} from 'react';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
+// import Head from './components/head';
+// import TodoItem from './components/todoitem';
+// import AddTodoItem from './components/addtodoitem';
+// // import SmartHome from './navigation/SmartHome';
+
 
 export default function App() {
-  const [todos, setTodos] = useState([
-    { text: 'buy coffee', key: '1'},
-    { text: 'create app', key: '2'},
-    { text: 'watch movie', key: '3'},
-  ]);
+    const [todos, setTodos] = useState([
+        { text: 'Buy Coffee', key: '1'},
+        { text: 'Create an App', key: '2'},
+        { text: 'Paly a game', key: '3'}
+    ]);
+    // const pressHandler = (key) => {
+    //     setTodos((prevTodos) => {
+    //         return prevTodos.filter(todo => todo.key != key);
+    //     });
+    // }
+    // const submitHandler = (text) => {
+    //     setTodos((prevTodos) => {
+    //         return [
+    //             { text: text, key: Math.random().toString() },
+    //             ...prevTodos
+    //         ]
+    //     });
+    // }
 
-
-  return (
-    <View style={styles.container}>
-      {/* Head */}
-      <Head />
-      <View style={styles.content}>
-        {/* Form */}
-        <View style={styles.list}>
-          <FlatList 
-            data={todos}
-            renderItem={({ item }) => (
-              <Text>{item.text}</Text>
-            )}
-          />
+    return (
+        <View style={styles.container}>
+            {/* Header */}
+            {/* <Head /> */}
+            <View style={styles.content}>
+                {/* <AddTodoItem submitHandler={submitHandler} />  */}
+                <View style={styles.list}>
+                    <FlatList
+                        data={todos}
+                        renderItem={({item}) => (<Text>{item.text}</Text>)}
+                        // renderItem={( {item}) => (
+                        // <TodoItem item={item} pressHandler={pressHandler} />
+                        // )}
+                    />
+                </View>
+            </View>
         </View>
-      </View>
-    </View>
-  );
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // paddingHorizontal: 20,
-    // paddingTop: 40
-  },
-  content: {
-    padding: 40,
-  },
-  list: {
-    marginTop:20
-  }
+    container: {
+        flex: 1,
+        backgroundColor: '#fff'
+    },
+    list: {
+        marginTop: 20
+    },
+    content: {
+        padding: 20
+    }
 });

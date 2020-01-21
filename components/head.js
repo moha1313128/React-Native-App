@@ -12,11 +12,11 @@ export default function Head() {
 
 const styles = StyleSheet.create ({
   head: {
-    marginTop:80,
-      height: 80,
-      width:1000,
-      padding: 38,
-      backgroundColor: 'coral'
+    // marginTop:30,
+    height: 80,
+    // width:1000,
+    padding: 38,
+    backgroundColor: 'coral'
   },
   title: {
     textAlign: 'center',
