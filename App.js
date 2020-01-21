@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
-// import Head from './components/head';
+import Head from './components/head';
 // import TodoItem from './components/todoitem';
 // import AddTodoItem from './components/addtodoitem';
 // // import SmartHome from './navigation/SmartHome';
@@ -28,17 +28,16 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            {/* Header */}
-            {/* <Head /> */}
+            <Head />
             <View style={styles.content}>
                 {/* <AddTodoItem submitHandler={submitHandler} />  */}
                 <View style={styles.list}>
                     <FlatList
                         data={todos}
-                        renderItem={({item}) => (<Text>{item.text}</Text>)}
-                        // renderItem={( {item}) => (
+                        renderItem={( {item}) => ( 
+                            <Text>{item.text}</Text>
                         // <TodoItem item={item} pressHandler={pressHandler} />
-                        // )}
+                        )}
                     />
                 </View>
             </View>
