@@ -4,9 +4,9 @@ import { globalStyles } from '../styles/global';
 
 export default function Detail({ navigation }) {
   const pressHandler = () => {
-    // navigation.goBack();
+    navigation.goBack();
     // navigation.push('Home');
-    navigation.popToTop();
+    // navigation.popToTop();
   }
   return (
     <View style={globalStyles.container}>
