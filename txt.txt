@@ -1,0 +1,105 @@
+import { NavigationContainer, createStackNavigator } from '@react-navigation/stack';
+import Home from '../screens/home';
+import Detail from '../screens/detail';
+
+const screens = {
+    Home: {
+        screen: Detail
+    },
+    Detail: {
+        screen: Detail
+    }
+}
+const HomeStack = createStackNavigator(screens);
+
+// export default NavigationContainer(HomeStack);
+
+
+//////// App.js
+
+// import * as React from 'react';
+import React, {useState} from 'react';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import  {ProductsScreen} from './screens/products';
+
+const getFonts = () => Font.loadAsync({
+  'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
+  'nunito-bold': require('./assets/fonts/Nunito-Bold.ttf'),
+});
+function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+      <Button
+        title="Go to about"
+        onPress={() => navigation.push('About')}
+      />
+    </View>
+  );
+}
+function DetailsScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Details Screen</Text>
+      
+      <Button
+        title="pop"
+        onPress={() => navigation.popToTop()}
+      />
+    </View>
+  );
+}
+function AboutScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>About Screen</Text>
+      <Button
+        title="Back"
+        onPress={() => navigation.goBack()}
+      />
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function App() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  if (fontsLoaded) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="About" component={AboutScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  } else {
+    return (
+      <AppLoading
+        startAsync={getFonts}
+        onFinish={()=> setFontsLoaded(true)}
+      />
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, alignItems: 'center', justifyContent: 'center',
+  },
+  title: {
+    fontFamily: 'nunito-bold', fontSize: 20,
+  }
+});
+
+export default App;
