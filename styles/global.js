@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export const globalStyles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#ea3345',
+      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
       // color: '#fff',
@@ -12,7 +12,7 @@ export const globalStyles = StyleSheet.create({
     title: {
       fontFamily: 'nunito-bold',
       fontSize: 20,
-      color: '#fff'
+      // color: '#fff'
     },
     paragraph: {
         marginVertical: 8,

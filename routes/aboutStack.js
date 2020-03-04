@@ -6,7 +6,7 @@ const screens = {
         screen: About,
         navigationOptions: {
             title: 'About us',
-            headerStyle: { backgroundColor: '#f7515f'}
+            headerStyle: { backgroundColor: '#fff'}
         }
     }
 }
@@ -14,7 +14,7 @@ const screens = {
 const AboutStack = createStackNavigator(screens, {
     defaultNavigationOptions: {
         // headerTintColor: '#f7515f',
-        headerStyle: { backgroundColor: '#eee', height: 60 }
+        // headerStyle: { backgroundColor: '#eee', height: 60 }
     }
 });
 
