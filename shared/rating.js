@@ -1,12 +1,12 @@
 import React, { Component }  from 'react';
 import ReviewModal from "react-native-review-modal";
 
-class StarRating extends Component {
+class StarRate extends Component {
 
     constructor(props) {
     super(props);
     this.state = {
-        starCount: 0
+        starCount: 1.0
     };
     }
 
@@ -17,15 +17,15 @@ class StarRating extends Component {
     }
 
     render() {
-    return (
-        <ReviewModal
-        starRating={this.state.starCount}
-        onStarRatingPress={rating => {
-            this.onStarRatingPress(rating);
-        }}
-        />
-    );
+        return (
+            <ReviewModal
+                starRating={this.state.starCount}
+                onStarRatingPress={rating => {
+                    this.onStarRatingPress(rating);
+                }}
+            />
+        );
     }
 }
 
-export default StarRating
+export default StarRate
