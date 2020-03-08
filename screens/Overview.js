@@ -11,17 +11,17 @@ const styles = StyleSheet.create({
 });
 
 
-class Settings extends Component {
+class Overview extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> Settings </Text>
+                <Text> Overview </Text>
             </View>
         )
     }
 }
 
-export default Settings;
+export default Overview;
 
 
 

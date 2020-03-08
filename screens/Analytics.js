@@ -11,17 +11,17 @@ const styles = StyleSheet.create({
 });
 
 
-class Settings extends Component {
+class Analytics extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> Settings </Text>
+                <Text> Analytics </Text>
             </View>
         )
     }
 }
 
-export default Settings;
+export default Analytics;
 
 
 

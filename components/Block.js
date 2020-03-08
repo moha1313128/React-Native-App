@@ -27,7 +27,7 @@ export default class Block extends Component {
 
 const styles = StyleSheet.create({
   block: {
-    // flex: 1,
+    flex: 1,
   },
   row: {
     flexDirection: 'row'

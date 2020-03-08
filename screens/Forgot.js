@@ -11,17 +11,17 @@ const styles = StyleSheet.create({
 });
 
 
-class Settings extends Component {
+class Forgot extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> Settings </Text>
+                <Text> Forgot </Text>
             </View>
         )
     }
 }
 
-export default Settings;
+export default Forgot;
 
 
 

@@ -1,73 +1,90 @@
-import React, {useState} from 'react';
-import Moment from 'react-moment';
-import { StyleSheet, View, Text, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Head from './components/head';
-import TodoItem from './components/todoitem';
-import AddTodoItem from './components/addtodoitem';
-import Sandbox from './components/sandbox';
+import React from 'react'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { Ionicons } from '@expo/vector-icons'
 
+import LoadingScreen from './screens/LoadingScreen'
+import LoginScreen from './screens/LoginScreen'
+import RegisterScreen from './screens/RegisterScreen'
+import HomeScreen from './screens/HomeScreen'
 
-export default function App() {
-    const [todos, setTodos] = useState([
-        { text: 'Buy Coffee', key: '1'},
-        { text: 'Create an App', key: '2'},
-        { text: 'Paly a game', key: '3'}
-    ]);
-    const pressHandler = (key) => {
-        setTodos((prevTodos) => {
-            return prevTodos.filter(todo => todo.key != key);
-        });
-    }
-    const submitHandler = (text) => {
-        if(text.length > 3) {
-            setTodos((prevTodos) => {
-                return [
-                    { text: text, key: Math.random().toString() },
-                    ...prevTodos,
-                ];
-            });
-        } else {
-            Alert.alert('Oops!', 'Enter Word That Have A Sens', [
-                {text: 'OK', onpress: () => console.log('Closed')}
-            ]);
+import MessageScreen from './screens/MessageScreen'
+import ProfileScreen from './screens/ProfileScreen'
+import PostScreen from './screens/PostScreen'
+import NotificationScreen from './screens/NotificationScreen'
+
+import * as firebase from 'firebase'
+
+var firebaseConfig = {
+  apiKey: "AIzaSyCtpDHz-bXl7-YZnD55pZBpZaEDzc2vsHE",
+  authDomain: "reactapp-469de.firebaseapp.com",
+  databaseURL: "https://reactapp-469de.firebaseio.com",
+  projectId: "reactapp-469de",
+  storageBucket: "reactapp-469de.appspot.com",
+  messagingSenderId: "1008829778774",
+  appId: "1:1008829778774:web:b24d444406c5588d15e4f7"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const AppTabNavigator = createBottomTabNavigator(
+  {
+    Home: {
+        screen: HomeScreen,
+        navigationOptions: {
+          tabBarIcon: ({tintColor}) => <Ionicons name="ios-home" size={24} color={tintColor}></Ionicons>
         }
+    },
+    Message: {
+      screen: MessageScreen,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => <Ionicons name="ios-chatboxes" size={24} color={tintColor}></Ionicons>
+      }
+    },
+    Post: {
+      screen: PostScreen,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => <Ionicons name="ios-add-circle" size={24} color={tintColor}></Ionicons>
+      }
+    },
+    Notification: {
+      screen: NotificationScreen,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => <Ionicons name="ios-notifications" size={24} color={tintColor}></Ionicons>
+      }
+    },
+    Profile: {
+      screen: NotificationScreen,
+      navigationOptions: {
+        tabBarIcon: ({tintColor}) => <Ionicons name="ios-person" size={24} color={tintColor}></Ionicons>
+      }
     }
-    
-    return (
-        // <Sandbox></Sandbox>
-        <TouchableWithoutFeedback onPress={() => {
-            Keyboard.dismiss();
-            // console.log('Dismiss');
-        }}>
-        <View style={styles.container}>
-            <Head />
-            <View style={styles.content}>
-                <AddTodoItem submitHandler={submitHandler} /> 
-                <View style={styles.list}>
-                    <FlatList
-                        data={todos}
-                        renderItem={( {item}) => ( 
-                            <TodoItem item={item} pressHandler={pressHandler} />
-                        )}
-                    />
-                </View>
-            </View>
-        </View>
-        </TouchableWithoutFeedback>
-    );
-}
+  },
+  {
+    activeTintColor: "#161F3D",
+    inactiveTintColor: "#BBBBC4",
+    showLabel: false
+  }  
+)
+const AppStack = createStackNavigator({
+  Home: HomeScreen
+})
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff'
+const AuthStack = createStackNavigator({
+  Login: LoginScreen,
+  Register: RegisterScreen
+})
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Loading: LoadingScreen,
+      App: AppTabNavigator,
+      Auth: AuthStack
     },
-    list: {
-        flex: 1,
-        marginTop: 20,
-    },
-    content: {
-        flex: 1,
-        padding: 20,
+    {
+      initialRouteName: "Loading"
     }
-});
+  )
+)

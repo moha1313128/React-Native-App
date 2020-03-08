@@ -11,17 +11,17 @@ const styles = StyleSheet.create({
 });
 
 
-class Settings extends Component {
+class Chat extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> Settings </Text>
+                <Text> Chat </Text>
             </View>
         )
     }
 }
 
-export default Settings;
+export default Chat;
 
 
 

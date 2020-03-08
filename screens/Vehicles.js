@@ -7,21 +7,21 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignContent: 'center'
-    }
+    }   
 });
 
 
-class Settings extends Component {
+class Vehicles extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> Settings </Text>
+                <Text> Vehicles </Text>
             </View>
         )
     }
 }
 
-export default Settings;
+export default Vehicles;
 
 
 
