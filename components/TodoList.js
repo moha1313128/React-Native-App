@@ -2,9 +2,21 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 export default TodoList = ({ list }) => {
+    const completedCount = list.todos.filter(todo => todo.completed).length;
+    const remainingCount = list.todos.length - completedCount;
     return (
         <View style={[styles.listContainer, {backgroundColor: list.color}]}>
-        <Text style={styles.listTitle} numberOfLines={1}>{list.name}</Text>
+            <Text style={styles.listTitle} numberOfLines={1}>{list.name}</Text>
+            <View>
+                <View style={{alignItems:'center'}}>
+                    <Text style={styles.count}>{completedCount}</Text>
+                    <Text style={styles.subtitle}>Completed</Text>
+                </View>
+                <View style={{alignItems:'center'}}>
+                    <Text style={styles.count}>{remainingCount}</Text>
+                    <Text style={styles.subtitle}>Remining</Text>
+                </View>
+            </View>
         </View>
     );
 }
@@ -17,6 +29,22 @@ const styles = StyleSheet.create({
         marginHorizontal: 12,
         alignItems: "center",
         width: 200,
+    },
+    listTitle: {
+        fontSize: 24,
+        fontWeight: "700",
+        color: '#fff',
+        marginBottom: 18 
+    },
+    count: {
+        fontSize: 48,
+        fontWeight: "200",
+        color: "#fff"
+    },
+    subtitle: {
+        fontSize: 12,
+        fontWeight: "700",
+        color: "#fff"
     }
 });
 
