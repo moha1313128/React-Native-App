@@ -1,71 +1,63 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity, FlatList, ListView } from 'react-native'
-import {AntDesign} from '@expo/vector-icons'
-import tempData from './tempData'
-import TodoList from './components/TodoList'
+import React from 'react';
+import Feed from './feed';
+import Detail from './detail';
 
-export default class App extends Component {
-  render() {
+import Screen1 from './screens/drawer/screen1';
+import Screen2 from './screens/drawer/screen2';
+import Screen3 from './screens/drawer/screen3';
+import Tab1 from './screens/tabs/Tab1';
+import Tab2 from './screens/tabs/Tab2';
+import Tab3 from './screens/tabs/Tab3';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
+
+const Drawer = createDrawerNavigator(); 
+const Stack = createStackNavigator();
+const MaterialBottomTabs = createMaterialBottomTabNavigator();
+const MaterialTopTabs = createMaterialTopTabNavigator();
+
+export default class App extends React.Component {
+  createHomeStack = () => 
+    <Stack.Navigator>
+      <Stack.Screen name="Feed" component={Feed} options={{title:"Feed", headerStyle: {backgroundColor: "#e91e63"} }} />
+      <Stack.Screen name="Detail" component={Detail} options={{title:"Detail", headerStyle: {backgroundColor: "#e91e63"} }}/>
+      <Stack.Screen name="Bottom Tabs" children={this.createBottomTabs} />
+      <Stack.Screen name="Top Tabs" children={this.createTopTabs} />
+    </Stack.Navigator>
+
+  createTopTabs = (props) => {
+    console.log(props);
+    return <MaterialTopTabs.Navigator tabBarOptions={{activeTintColor:'#e91e63' }} >
+      <MaterialTopTabs.Screen name="Tab 1" component={Tab1} options={{tabBarLabel: 'Profile'}}/>
+      <MaterialTopTabs.Screen name="Tab 2" component={Tab2} options={{tabBarLabel: 'Market'}}/>
+      <MaterialTopTabs.Screen name="Tab 3" component={Tab3} options={{tabBarLabel: 'About me'}}/>
+    </MaterialTopTabs.Navigator>
+  }  
+  
+  createBottomTabs = (props) => {
+    console.log(props);
+    return <MaterialBottomTabs.Navigator activeColor='#f0edf6' inactiveColor="#3e2465" barStyle={{ backgroundColor: '#e91e63' }}>
+      <MaterialBottomTabs.Screen name="Tab 1" component={Tab1} options={{tabBarLabel: null, tabBarIcon: ({color})=>(<MaterialCommunityIcons name="home" color={color} size={26} />)}} />
+      <MaterialBottomTabs.Screen name="Tab 2" component={Tab2} options={{tabBarLabel: null, tabBarIcon: ({color})=>(<MaterialCommunityIcons name="bell" color={color} size={26} />)}} />
+      <MaterialBottomTabs.Screen name="Tab 3" component={Tab3} options={{tabBarLabel: null, tabBarIcon: ({color})=>(<MaterialCommunityIcons name="account" color={color} size={26} />)}} />
+    </MaterialBottomTabs.Navigator>
+  } 
+  render()
+  {
     return (
-      <View style={styles.container}>
-        <View style={{ flexDirection: "row" }}>
-          <View style={styles.divider} />
-            <Text style={styles.title}>
-              Todo <Text style={{fontWeight: "300", color: "#24A6D9"}}>Lists</Text>
-            </Text>
-            <View style={styles.divider} />
-        </View>
-
-        <View style={{marginVertical: 48}}>
-          <TouchableOpacity style={styles.addList}>
-            <AntDesign name="plus" size={16} color="#24A6D9"></AntDesign>
-          </TouchableOpacity>
-          <Text style={styles.add}>Add List</Text>
-        </View>
-        <View style={{height: 275, paddingLeft: 32}}>
-        <FlatList 
-            data={tempData} 
-            keyExtractor={item => item.name} 
-            horizontal={true} 
-            showsHorizontalScrollIndicator={false} 
-            renderItem={({item}) => <TodoList list={item} />}
-          />
-        </View>
-      </View>
-    )
+      <NavigationContainer>
+        <Drawer.Navigator>
+          <Drawer.Screen name="Home" children={this.createHomeStack} />
+          <Drawer.Screen name="Conatct" component={Screen1} />
+          <Drawer.Screen name="Favorites" component={Screen2} />
+          <Drawer.Screen name="Settings" component={Screen3} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  divider: {
-    backgroundColor: "#A7CBD9",
-    height: 1,
-    flex: 1,
-    alignSelf: 'center'
-  },
-  title: {
-    fontSize: 38,
-    fontWeight: "800",
-    color: "#2D3436",
-    paddingHorizontal: 64
-  },
-  addList: {
-    borderWidth: 2,
-    borderColor: "#A7CBD9",
-    borderRadius: 4,
-    padding: 16,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  add: {
-    color: "#24A6D9",
-    fontWeight: "600",
-    fontSize: 14,
-    marginTop: 8
-  }
-})
